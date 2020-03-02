@@ -50,6 +50,7 @@ def add_baptism_application(request):
             invoice.save()
             item = invoice_item_form.save(commit=False)
             item.invoice= invoice
+
             item.item_type = ItemType.objects.get(name="Baptism")
             item.quantity = 1
             item.balance = item.balance-item.amount_paid-item.discount
@@ -64,7 +65,11 @@ def add_baptism_application(request):
             context['Submit_Form']= Submit_Form()
             return render(request,"sacrament/application_baptism.html",context) 
     else:
-        suggested_price = ItemType.objects.get(name="Baptism").suggested_price
+        try:
+            suggested_price = ItemType.objects.get(name="Baptism").suggested_price
+        except ItemType.DoesNotExist:
+            suggested_price = 0
+
         context['BaptismModelForm']= BaptismModelForm(prefix="baptism")
         context['ProfileModelForm']= ProfileModelForm(prefix="profile")
         context['SponsorFormset']= SponsorFormset()
@@ -121,7 +126,11 @@ def add_confirmation_application(request):
             context['Submit_Form']= Submit_Form()
             return render(request,"sacrament/application_confirmation.html",context) 
     else:
-        suggested_price = ItemType.objects.get(name="Confirmation").suggested_price
+        try:
+            suggested_price = ItemType.objects.get(name="Confirmation").suggested_price
+        except ItemType.DoesNotExist:
+            suggested_price = 0
+
         context['ConfirmationModelForm']= ConfirmationModelForm(prefix="confirmation")
         context['ProfileModelForm']= ProfileModelForm(prefix="profile")
         context['SponsorFormset']= SponsorFormset()
@@ -190,7 +199,11 @@ def add_marriage_application(request):
             context['Submit_Form']= Submit_Form()
             return render(request,"sacrament/application_marriage.html",context)
     else:
-        suggested_price = ItemType.objects.get(name="Marriage").suggested_price
+        try:
+            suggested_price = ItemType.objects.get(name="Marriage").suggested_price
+        except ItemType.DoesNotExist:
+            suggested_price = 0
+
         context['MarriageModelForm']= MarriageModelForm(prefix="marriage")
         context['GroomModelForm']= ProfileModelForm(initial={'gender':Profile.MALE},prefix="groom")
         context['BrideModelForm']= ProfileModelForm(initial={'gender':Profile.FEMALE},prefix="bride")

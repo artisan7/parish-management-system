@@ -27,7 +27,7 @@ urlpatterns = [
     path('application/marriage', views.add_marriage_application, name='add-marriage-application'),
 
     # update data
-    path('update/marriage', views.add_marriage_application, name='add-marriage-application'),
+    # path('update/marriage', views.add_marriage_application, name='add-marriage-application'),
 
 
     path('records/baptism', views.view_records_baptism, name='view-records-baptism'),
