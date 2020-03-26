@@ -22,7 +22,7 @@ class SacramentModel(models.Model):
     page_number = models.CharField(max_length=64, null=True, blank=True)
     remarks = models.CharField(max_length=1024, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
-    target_price = models.DecimalField(null=True,blank=True, max_digits=16, decimal_places=2)
+    #target_price = models.DecimalField(null=True,blank=True, max_digits=16, decimal_places=2)
 
     class Meta:
         # This class is abstract and will not be used
@@ -55,14 +55,6 @@ class Baptism(SacramentModel):
         related_name="baptism"
     )
     legitimacy = models.SmallIntegerField(max_length=1, choices=_CHOICES)
-    mother_first_name = models.CharField(max_length=64, blank=True, null=True)
-    mother_middle_name = models.CharField(max_length=64, blank=True, null=True)
-    mother_last_name = models.CharField(max_length=64, blank=True, null=True)
-    father_first_name = models.CharField(max_length=64, blank=True, null=True)
-    father_middle_name = models.CharField(max_length=64, blank=True, null=True)
-    father_last_name = models.CharField(max_length=64, blank=True, null=True)
-    mother_suffix = models.CharField(max_length=10, blank=True, null=True)
-    father_suffix = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return f"b {self.profile.last_name}, {self.profile.first_name}"
@@ -88,23 +80,6 @@ class Marriage(SacramentModel):
         on_delete=models.PROTECT,
         related_name='brides'
     )
-    groom_mother_first_name = models.CharField(max_length=64,blank=True, null=True)
-    groom_mother_middle_name = models.CharField(max_length=64,blank=True, null=True)
-    groom_mother_last_name = models.CharField(max_length=64,blank=True, null=True)
-    groom_mother_suffix = models.CharField(max_length=10,blank=True, null=True)
-    groom_father_first_name = models.CharField(max_length=64,blank=True, null=True)
-    groom_father_middle_name = models.CharField(max_length=64,blank=True, null=True)
-    groom_father_last_name = models.CharField(max_length=64,blank=True, null=True)
-    groom_father_suffix = models.CharField(max_length=10,blank=True, null=True)
-
-    bride_mother_first_name = models.CharField(max_length=64,blank=True, null=True)
-    bride_mother_middle_name = models.CharField(max_length=64,blank=True, null=True)
-    bride_mother_last_name = models.CharField(max_length=64,blank=True, null=True)
-    bride_mother_suffix = models.CharField(max_length=10,blank=True, null=True)
-    bride_father_first_name = models.CharField(max_length=64,blank=True, null=True)
-    bride_father_middle_name = models.CharField(max_length=64,blank=True, null=True)
-    bride_father_last_name = models.CharField(max_length=64,blank=True, null=True)
-    bride_father_suffix = models.CharField(max_length=10,blank=True, null=True)
 
     def __str__(self):
         return f"m {self.groom_profile.last_name} - {self.bride_profile.last_name}"
@@ -160,6 +135,14 @@ class Profile(PersonAbstractModel):
     gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES)
     birthplace = models.CharField(max_length=255, null=True, blank=True)
     residence = models.CharField(max_length=255, null=True, blank=True)
+    mother_first_name = models.CharField(max_length=64, blank=True, null=True)
+    mother_middle_name = models.CharField(max_length=64, blank=True, null=True)
+    mother_last_name = models.CharField(max_length=64, blank=True, null=True)
+    mother_suffix = models.CharField(max_length=10, blank=True, null=True)
+    father_first_name = models.CharField(max_length=64, blank=True, null=True)
+    father_middle_name = models.CharField(max_length=64, blank=True, null=True)
+    father_last_name = models.CharField(max_length=64, blank=True, null=True)
+    father_suffix = models.CharField(max_length=10, blank=True, null=True)
 
 
 class Minister(PersonAbstractModel):

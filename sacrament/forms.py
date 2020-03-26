@@ -47,6 +47,14 @@ class ProfileModelForm(ModelForm):
         cleaned_data['suffix']= titleCase(cleaned_data['suffix'])
         cleaned_data['residence']= titleCase(cleaned_data['residence'])
         cleaned_data['birthplace']= titleCase(cleaned_data['birthplace'])
+        cleaned_data['mother_first_name']= titleCase(cleaned_data['mother_first_name'])
+        cleaned_data['mother_middle_name']= titleCase(cleaned_data['mother_middle_name'])
+        cleaned_data['mother_last_name']= titleCase(cleaned_data['mother_last_name'])
+        cleaned_data['mother_suffix']= titleCase(cleaned_data['mother_suffix'])
+        cleaned_data['father_first_name']= titleCase(cleaned_data['father_first_name'])
+        cleaned_data['father_middle_name']= titleCase(cleaned_data['father_middle_name'])
+        cleaned_data['father_last_name']= titleCase(cleaned_data['father_last_name'])
+        cleaned_data['father_suffix']= titleCase(cleaned_data['father_suffix'])
         return cleaned_data
     
 class BaptismModelForm(ModelForm):
@@ -58,7 +66,6 @@ class BaptismModelForm(ModelForm):
                    'page_number',
                    'remarks',
                    'date',
-                   'target_price',
                    'status',
                    'profile',
                    ]
@@ -82,14 +89,6 @@ class BaptismModelForm(ModelForm):
                     """
         titleCase = lambda x: x.title() if x else ""
         cleaned_data = super().clean()
-        cleaned_data['mother_first_name']= titleCase(cleaned_data['mother_first_name'])
-        cleaned_data['mother_middle_name']= titleCase(cleaned_data['mother_middle_name'])
-        cleaned_data['mother_last_name']= titleCase(cleaned_data['mother_last_name'])
-        cleaned_data['mother_suffix']= titleCase(cleaned_data['mother_suffix'])
-        cleaned_data['father_first_name']= titleCase(cleaned_data['father_first_name'])
-        cleaned_data['father_middle_name']= titleCase(cleaned_data['father_middle_name'])
-        cleaned_data['father_last_name']= titleCase(cleaned_data['father_last_name'])
-        cleaned_data['father_suffix']= titleCase(cleaned_data['father_suffix'])
         return cleaned_data
         #ValidationError(_('Please complete parent details'), code='invalid')
             
@@ -102,7 +101,6 @@ class ConfirmationModelForm(ModelForm):
                    'page_number',
                    'remarks',
                    'date',
-                   'target_price',
                    'status',
                    'profile',
                    ]
@@ -117,7 +115,6 @@ class MarriageModelForm(ModelForm):
                    'page_number',
                    'remarks',
                    'date',
-                   'target_price',
                    'status',
                    'groom_profile',
                    'bride_profile',
@@ -125,22 +122,6 @@ class MarriageModelForm(ModelForm):
     def clean(self):
         titleCase = lambda x: x.title() if x else ""
         cleaned_data = super().clean()
-        cleaned_data['groom_mother_first_name']= titleCase(cleaned_data['groom_mother_first_name'])
-        cleaned_data['groom_mother_middle_name']= titleCase(cleaned_data['groom_mother_middle_name'])
-        cleaned_data['groom_mother_last_name']= titleCase(cleaned_data['groom_mother_last_name'])
-        cleaned_data['groom_mother_suffix']= titleCase(cleaned_data['groom_mother_suffix'])
-        cleaned_data['groom_father_first_name']= titleCase(cleaned_data['groom_father_first_name'])
-        cleaned_data['groom_father_middle_name']= titleCase(cleaned_data['groom_father_middle_name'])
-        cleaned_data['groom_father_last_name']= titleCase(cleaned_data['groom_father_last_name'])
-        cleaned_data['groom_father_suffix']= titleCase(cleaned_data['groom_father_suffix'])
-        cleaned_data['bride_mother_first_name']= titleCase(cleaned_data['bride_mother_first_name'])
-        cleaned_data['bride_mother_middle_name']= titleCase(cleaned_data['bride_mother_middle_name'])
-        cleaned_data['bride_mother_last_name']= titleCase(cleaned_data['bride_mother_last_name'])
-        cleaned_data['bride_mother_suffix']= titleCase(cleaned_data['bride_mother_suffix'])
-        cleaned_data['bride_father_first_name']= titleCase(cleaned_data['bride_father_first_name'])
-        cleaned_data['bride_father_middle_name']= titleCase(cleaned_data['bride_father_middle_name'])
-        cleaned_data['bride_father_last_name']= titleCase(cleaned_data['bride_father_last_name'])
-        cleaned_data['bride_father_suffix']= titleCase(cleaned_data['bride_father_suffix'])
         return cleaned_data
 
 class RequiredFormSet(BaseFormSet):

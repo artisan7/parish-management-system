@@ -83,18 +83,18 @@ def update_record(request):
         profile.gender = request.POST.get('gender')
         profile.birthdate = request.POST.get('birthdate')
         profile.birthplace = request.POST.get('birthplace')
+
+        profile.mother_first_name = request.POST.get('mother_first_name')
+        profile.mother_middle_name = request.POST.get('mother_middle_name')
+        profile.mother_last_name = request.POST.get('mother_last_name')
+        profile.mother_suffix = request.POST.get('mother_suffix')
+
+        profile.father_first_name = request.POST.get('father_first_name')
+        profile.father_middle_name = request.POST.get('father_middle_name')
+        profile.father_last_name = request.POST.get('father_last_name')
+        profile.father_suffix = request.POST.get('father_suffix')
+
         b.legitimacy = request.POST.get('legitimacy')
-
-        b.mother_first_name = request.POST.get('mother_first_name')
-        b.mother_middle_name = request.POST.get('mother_middle_name')
-        b.mother_last_name = request.POST.get('mother_last_name')
-        b.mother_suffix = request.POST.get('mother_suffix')
-
-        b.father_first_name = request.POST.get('mother_first_name')
-        b.father_middle_name = request.POST.get('mother_middle_name')
-        b.father_last_name = request.POST.get('mother_last_name')
-        b.father_suffix = request.POST.get('mother_suffix')
-
         b.minister = Minister.objects.get(id=int(request.POST.get('minister')))
 
         # Registry details.
@@ -148,14 +148,14 @@ def post_request_registry_number(request):
             "legitimacy": b.legitimacy,
             "minister": b.minister.id,
             "minister_name": f"{str(b.minister)}",
-            "mother_first_name": b.mother_first_name,
-            "mother_middle_name": b.mother_middle_name,
-            "mother_last_name": b.mother_last_name,
-            "mother_suffix": b.mother_suffix,
-            "father_first_name": b.father_first_name,
-            "father_middle_name": b.father_middle_name,
-            "father_last_name": b.father_last_name,
-            "father_suffix": b.father_suffix,
+            "mother_first_name": profile.mother_first_name,
+            "mother_middle_name": profile.mother_middle_name,
+            "mother_last_name": profile.mother_last_name,
+            "mother_suffix": profile.mother_suffix,
+            "father_first_name": profile.father_first_name,
+            "father_middle_name": profile.father_middle_name,
+            "father_last_name": profile.father_last_name,
+            "father_suffix": profile.father_suffix,
             "registry_number":b.registry_number if b.registry_number else "",
             "record_number":b.record_number if b.record_number else "",
             "page_number":b.page_number if b.page_number else "",
@@ -188,14 +188,14 @@ def get_payment_details(request):
             "legitimacy": b.legitimacy,
             "minister": b.minister.id,
             "minister_name": f"{str(b.minister)}",
-            "mother_first_name": b.mother_first_name,
-            "mother_middle_name": b.mother_middle_name,
-            "mother_last_name": b.mother_last_name,
-            "mother_suffix": b.mother_suffix,
-            "father_first_name": b.father_first_name,
-            "father_middle_name": b.father_middle_name,
-            "father_last_name": b.father_last_name,
-            "father_suffix": b.father_suffix,
+            "mother_first_name": profile.mother_first_name,
+            "mother_middle_name": profile.mother_middle_name,
+            "mother_last_name": profile.mother_last_name,
+            "mother_suffix": profile.mother_suffix,
+            "father_first_name": profile.father_first_name,
+            "father_middle_name": profile.father_middle_name,
+            "father_last_name": profile.father_last_name,
+            "father_suffix": profile.father_suffix,
             "registry_number":b.registry_number if b.registry_number else "",
             "record_number":b.record_number if b.record_number else "",
             "page_number":b.page_number if b.page_number else "",

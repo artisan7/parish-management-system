@@ -28,6 +28,10 @@ def add_baptism_application(request):
         sponsor_formset = SponsorFormset(request.POST) 
         invoice_form = InvoiceModelForm_Application(request.POST,prefix="invoice")
         invoice_item_form = InvoiceItemModelForm_Application(request.POST,prefix="invoice_item")
+
+        print(invoice_form)
+        print(invoice_item_form)
+
         if profile_form.is_valid() and baptism_form.is_valid() and invoice_form.is_valid() and invoice_item_form.is_valid() and sponsor_formset.is_valid():
             profile = profile_form.save()
             baptism = baptism_form.save(commit=False)
@@ -68,7 +72,9 @@ def add_baptism_application(request):
         try:
             suggested_price = ItemType.objects.get(name="Baptism").suggested_price
         except ItemType.DoesNotExist:
-            suggested_price = 0
+            item_type = ItemType(name="Baptism", suggested_price=0)
+            item_type.save()
+            suggested_price = ItemType.objects.get(name="Baptism").suggested_price
 
         context['BaptismModelForm']= BaptismModelForm(prefix="baptism")
         context['ProfileModelForm']= ProfileModelForm(prefix="profile")
@@ -129,7 +135,9 @@ def add_confirmation_application(request):
         try:
             suggested_price = ItemType.objects.get(name="Confirmation").suggested_price
         except ItemType.DoesNotExist:
-            suggested_price = 0
+            item_type = ItemType(name="Confirmation", suggested_price=0)
+            item_type.save()
+            suggested_price = ItemType.objects.get(name="Confirmation").suggested_price
 
         context['ConfirmationModelForm']= ConfirmationModelForm(prefix="confirmation")
         context['ProfileModelForm']= ProfileModelForm(prefix="profile")
@@ -202,7 +210,9 @@ def add_marriage_application(request):
         try:
             suggested_price = ItemType.objects.get(name="Marriage").suggested_price
         except ItemType.DoesNotExist:
-            suggested_price = 0
+            item_type = ItemType(name="Marriage", suggested_price=0)
+            item_type.save()
+            suggested_price = ItemType.objects.get(name="Marriage").suggested_price
 
         context['MarriageModelForm']= MarriageModelForm(prefix="marriage")
         context['GroomModelForm']= ProfileModelForm(initial={'gender':Profile.MALE},prefix="groom")
