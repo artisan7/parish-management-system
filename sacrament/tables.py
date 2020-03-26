@@ -27,11 +27,11 @@ class BaptismTable(AbstractTable):
     
     class Meta(AbstractTable.Meta):
         model = Baptism
-        exclude = ('target_price','minister','registry_number','page_number','record_number', 'remarks',
+        exclude = ('registry_number','record_number', 'remarks',
             'mother_last_name', 'mother_first_name', 'mother_middle_name', 'mother_suffix',
             'father_last_name', 'father_first_name', 'father_middle_name', 'father_suffix',
         )  
-        sequence = ('id', 'profile', 'status', 'date', 'target_price', 'minister', 'legitimacy')
+        sequence = ('id', 'page_number', 'profile', 'status', 'date', 'target_price', 'minister', 'legitimacy')
         
 
 class ConfirmationTable(AbstractTable):

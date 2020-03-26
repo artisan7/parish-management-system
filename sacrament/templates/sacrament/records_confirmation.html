@@ -18,6 +18,15 @@
     <script>
         var response_text = '';
 
+        function approve() {
+            $.post('localhost:8000/sacrament/post/registry', $('#approve-form').serialize(),
+            {
+                type: 'POST',
+                beforeSend: function(xhr){xhr.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'))}
+            }
+            )
+        }
+
         function loadConfirmationRecords() {
             $("#sponsors-body").html("");
             var data = response_text;
@@ -128,5 +137,256 @@
 {% endblock %}
 
 {% block modal_title %}
-Baptismal Record
+Confirmation Record
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block approve_modal_content%}
+
+    <form id="approve-form">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Approve Record</h5>
+            
+                
+            <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="approve-modal-body p-3">
+            <div class="row">
+                <div class="col-10">
+                    <p><small>Please review and confirm the following details to complete the approval of the baptism.</small></p>
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="registry-input">Reg#</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control form-control-esm" id="registry-input" aria-describedby="emailHelp" placeholder="Registry number">
+                        </div>
+                        <div class="col-4">
+                            <label for="record-input">Rec#</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control form-control-esm" id="record-input" placeholder="Record number">
+                        </div>
+                        <div class="col-4">
+                            <label for="page-input">Pag#</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control form-control-esm" id="page-input" placeholder="Page number">
+                        </div>
+                    </div>    
+                </div>
+                        
+                    
+            </div>
+
+
+            <div class="row">
+                <div class="col"> 
+                    <h5>Confirmation Record</h5>
+                    <input type="hidden" id="modal-name" value="confirmation"/>
+                    <hr />
+                </div>
+            </div>
+            <div class="ml-3 mr-4">
+                <div class="row">
+                    <div class="col-3">
+                        <label for="input-first-name">First name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-first-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-middle-name">Middle name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-middle-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-last-name">Last name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-last-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-last-name">Suffix (Optional)</label>
+                        <input type="text" class="form-control form-control-sm" id="input-suffix" placeholder="Suffix">
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-3">
+                        <label for="input-first-name">Gender</label>
+                        <select class="form-control form-control-sm" id="input-gender">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    {% comment %}<div class="col-3">
+                         <label for="input-birthdate">Birthdate</label>
+                                        <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+                                            <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                                            
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker3').datetimepicker({
+                                            format: 'LT'
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div> {% endcomment %}
+                        
+                    
+                        <div class="col-3">
+                            <label for="input-birthdate">Birthdate</label>
+                            <div class="form-group">
+                                <div class="input-group date" id="birthdate_dtp" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#birthdate_dtp" id="input-birthdate"/>
+                                    <div class="input-group-append" data-target="#birthdate_dtp" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#birthdate_dtp').datetimepicker({
+                                    format: 'L'
+                                });
+                            });
+                        </script>
+                
+
+                    <div class="col-3">
+                        <label for="input-birthplace">Birthplace</label>
+                        <input type="text" class="form-control form-control-sm" id="input-birthplace" placeholder="Birthplace">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-legitimacy">Legitimacy</label>
+                        <select class="form-control form-control-sm" id="input-legitimacy">
+                            <option value="0">Natural</option>
+                            <option value="1">Civil</option>
+                            <option value="2">Legal</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+
+                <div class="row mt-3">
+                    <div class="col-3">
+                        <label for="input-mother-first-name">Mother's First name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-mother-first-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-mother-middle-name">Mother's Middle name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-mother-middle-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-mother-last-name">Mother's Last name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-mother-last-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-mother-suffix">Mother's Suffix</label>
+                        <input type="text" class="form-control form-control-sm" id="input-mother-suffix" placeholder="Suffix">
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-3">
+                        <label for="input-father-first-name">Father's First name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-father-first-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-father-middle-name">Father's Middle name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-father-middle-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-father-last-name">Father's Last name</label>
+                        <input type="text" class="form-control form-control-sm" id="input-father-last-name" placeholder="First name">
+                    </div>
+                    <div class="col-3">
+                        <label for="input-father-suffix">Father's Suffix</label>
+                        <input type="text" class="form-control form-control-sm" id="input-father-suffix" placeholder="Suffix">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <label for="ministers">Minister</label><br />
+                        <select class="form-control minister-dropdown" id="input-minister">
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="input-status">Status</label>
+                        <select class="form-control form-control-sm" id="input-status">
+                        <option value=0>Approved</option>
+                        <option value=1>Declined</option>
+                        <option value=2>Pending</option>
+                        <option value=3>Finished</option>
+                        </select>
+                        <!--<input type="text" class="" id="input-last-name" placeholder="Suffix">-->
+                    </div>
+                </div>
+                
+            </div>
+            
+
+            
+            
+            <div class="ml-3 mr-4">
+                
+            </div>
+
+            <div class="row mt-1">
+                <div class="col"> 
+                    <h5>Sponsors</h5>
+                    <hr />
+                </div>
+            </div>
+
+            <table class="table table-hover table-bordered selectable-table" id="sponsors-table-edit">
+                <thead class="thead-default theading">
+                    <tr>
+                        <th>Name</th>
+                        <th>Residence</th>
+                    </tr>
+                </thead>
+                <tbody id="sponsors-body">
+                    <!--Sponsors Content Here: Use JQUERY TO FILL IN DETAILS-->
+                </tbody>
+            </table>
+
+
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateRegistry()">Done</button>
+        </div>
+        </div>
+    </form>
+
+    
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/sacrament/application.js' %}"></script>
 {% endblock %}
