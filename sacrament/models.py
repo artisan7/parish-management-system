@@ -105,6 +105,9 @@ class Marriage(SacramentModel):
     bride_father_middle_name = models.CharField(max_length=64,blank=True, null=True)
     bride_father_last_name = models.CharField(max_length=64,blank=True, null=True)
     bride_father_suffix = models.CharField(max_length=10,blank=True, null=True)
+
+    def __str__(self):
+        return f"m {self.groom_profile.last_name} - {self.bride_profile.last_name}"
     
 
 
@@ -126,13 +129,12 @@ class Confirmation(SacramentModel):
         related_name="confirmation"
     )
 
+    def __str__(self):
+        return f"c {self.profile.last_name}, {self.profile.first_name}"
+
 """
 Sacraments
 """
-
-
-
-
 
 class PersonAbstractModel(models.Model):
     first_name = models.CharField(max_length=255)

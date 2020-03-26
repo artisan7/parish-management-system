@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/usr/bin/python3",
+    "python.pythonPath": "mati-parish-env\\Scripts\\python.exe",
     "python.formatting.provider": "yapf"
 }
