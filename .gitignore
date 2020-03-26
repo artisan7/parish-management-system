@@ -113,11 +113,14 @@ celerybeat-schedule
 # Environments
 .env
 .venv
+.mati-parish-env
 env/
 venv/
 ENV/
+mati-parish-env/
 env.bak/
 venv.bak/
+mati-parish-env.bak/
 
 # Spyder project settings
 .spyderproject
@@ -136,4 +139,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#VSCODE
+.vscode/
+settings.json
 
